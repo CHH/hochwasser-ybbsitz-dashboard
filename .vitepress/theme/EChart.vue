@@ -1,7 +1,7 @@
 <script setup>
 import * as echarts from 'echarts'
 import { inject, onBeforeUnmount, onMounted, onUpdated, ref, watch } from 'vue';
-import langDE from 'echarts/i18n/langDE.js'
+import langDE from 'echarts/lib/i18n/langDE.js'
 import merge from 'lodash/merge'
 
 echarts.registerLocale('DE', langDE)
