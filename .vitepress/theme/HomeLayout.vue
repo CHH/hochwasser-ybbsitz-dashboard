@@ -30,9 +30,8 @@ import { data as history } from '../../data/history.data.js'
                     :options="{
                         xAxis: [
                             {
-                                type: 'category',
+                                type: 'time',
                                 name: 'Zeit',
-                                data: history[river.id].map((it) => it.Key)
                             }
                         ],
                         yAxis: {
@@ -40,11 +39,35 @@ import { data as history } from '../../data/history.data.js'
                             min: 0,
                             max: Math.max(+pegel[river.id].Key.cLinie3, ...history[river.id].map((it) => +it.Value)),
                         },
+                        tooltip: {
+                        },
+                        toolbox: {
+                            feature: {
+                                dataZoom: {
+                                    yAxisIndex: 'none'
+                                },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        dataZoom: [
+                            {
+                                type: 'inside',
+                                start: 0,
+                                end: 100
+                            },
+                            {
+                                start: 0,
+                                end: 100
+                            }
+                        ],
                         series: [
                             {
                                 type: 'line',
                                 step: true,
-                                data: history[river.id].map((it) => it.Value),
+                                data: history[river.id].map((it) => (
+                                    [+dayjs(it.Key), it.Value]
+                                )),
                                 markLine: {
                                     data: [
                                         {
