@@ -90,8 +90,8 @@ import { data as history } from '../../data/history.data.js'
                 <details class="mt-3">
                     <summary>Rohdaten</summary>
 
-                    <pre><code>{{ pegel[river.id] }}</code></pre>
-                    <pre><code>{{ history[river.id] }}</code></pre>
+                    <pre class="text-xs"><code>{{ pegel[river.id] }}</code></pre>
+                    <pre class="text-xs"><code>{{ history[river.id] }}</code></pre>
                 </details>
             </div>
         </section>
