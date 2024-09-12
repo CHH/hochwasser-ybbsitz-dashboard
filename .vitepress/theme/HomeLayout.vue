@@ -63,6 +63,7 @@ import { data as history } from '../../data/history.data.js'
                         ],
                         series: [
                             {
+                                name: `Pegel ${river.name}`,
                                 type: 'line',
                                 step: true,
                                 data: history[river.id].map((it) => (
