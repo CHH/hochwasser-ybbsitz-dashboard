@@ -12,20 +12,24 @@ import { data as history } from '../../data/history.data.js'
         <h1>Dashboard</h1>
 
         <section
-            class="border"
+            class="border border-sky-600 rounded bg-white"
             v-for="(river) in rivers"
         >
-            <header class="p-3 border-b">
-                <h2>{{ river.name }}</h2>
+            <header class="py-3 px-6 bg-sky-100 rounded-t grid grid-cols-12 items-center">
+                <h2 class="col-span-6">{{ river.name }}</h2>
+                <div class="col-span-6 text-right">
+                    <div>
+                        {{ (+(pegel[river.id].Value?.Value ?? null)).toLocaleString() }} cm
+                    </div>
+                    <div class="text-sky-600 text-sm">
+                        {{ dayjs(pegel[river.id].Value?.Key).format('DD.MM.YYYY HH:mm') }}
+                    </div>
+                </div>
             </header>
 
-            <div class="p-3">
-                <div>{{ dayjs(pegel[river.id].Value?.Key).format('DD.MM.YYYY HH:mm') }}</div>
-                <div>
-                    {{ (+(pegel[river.id].Value?.Value ?? null)).toLocaleString() }} cm
-                </div>
-                
+            <div class="py-3 px-6">                
                 <e-chart
+                    class="border-0"
                     :height="300"
                     :options="{
                         xAxis: [
