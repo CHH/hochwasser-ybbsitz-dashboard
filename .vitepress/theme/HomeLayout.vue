@@ -30,7 +30,7 @@ import { data as history } from '../../data/history.data.js'
                 <div class="py-3 px-6">
                     <e-chart
                         class="border-0"
-                        :height="300"
+                        :height="400"
                         :options="{
                             xAxis: [
                                 {
@@ -73,6 +73,7 @@ import { data as history } from '../../data/history.data.js'
                                     data: history[river.id].map((it) => (
                                         [+dayjs(it.Key), it.Value]
                                     )),
+                                    symbolSize: 0,
                                     markLine: {
                                         data: [
                                             {
