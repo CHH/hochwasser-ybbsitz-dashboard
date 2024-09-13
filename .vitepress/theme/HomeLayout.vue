@@ -127,7 +127,7 @@ import { data as history } from '../../data/history.data.js'
 
     <footer class="mt-9">
         <div>
-            Die Daten für dieses Dashboard werden alle 30 Minuten aktualisiert.
+            Die Daten für dieses Dashboard werden alle 15 Minuten aktualisiert.
         </div>
 
         <div class="mt-3">
