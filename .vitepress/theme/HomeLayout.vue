@@ -1,10 +1,28 @@
 <script setup>
-import { ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import EChart from './EChart.vue';
 import dayjs from 'dayjs';
 import { data as rivers } from '../../data/rivers.data.js'
 import { data as pegel } from '../../data/pegel.data.js'
 import { data as history } from '../../data/history.data.js'
+
+const timer = ref(null)
+
+onMounted(() => {
+    timer.value = setInterval(() => {
+        const timestamp = +(new Date())
+        const minutes = Math.floor(timestamp / 1000 / 60)
+
+        // Reload every 15th minute of the hour
+        if ((minutes % 15) === 0) {
+            document.location.reload()
+        }
+    }, 60 * 1000)
+})
+
+onBeforeUnmount(() => {
+    clearInterval(timer.value)
+})
 </script>
 
 <template>
