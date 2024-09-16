@@ -13,8 +13,8 @@ onMounted(() => {
         const timestamp = +(new Date())
         const minutes = Math.floor(timestamp / 1000 / 60)
 
-        // Reload every 15th minute of the hour
-        if ((minutes % 15) === 0) {
+        // Reload every 5th minute of the hour
+        if ((minutes % 5) === 0) {
             document.location.reload()
         }
     }, 60 * 1000)
