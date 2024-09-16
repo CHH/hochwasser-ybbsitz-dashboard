@@ -29,9 +29,9 @@ onBeforeUnmount(() => {
     <div class="">
         <h1 class="mb-3">Dashboard</h1>
 
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-3 xl:gap-6"> 
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-3 xl:gap-6"> 
             <section
-                class="rounded-xl bg-white shadow-sm"
+                class="rounded-xl bg-white shadow-sm xl:col-span-6"
                 v-for="(river) in rivers"
             >
                 <header class="py-3 px-6 rounded-t grid grid-cols-12 items-center">
@@ -139,6 +139,18 @@ onBeforeUnmount(() => {
                         <pre class="text-xs"><code>{{ history[river.id] }}</code></pre>
                     </details>
                 </div>
+            </section>
+
+            <section class="rounded-xl bg-white shadow-sm xl:col-span-6 overflow-hidden">
+                <iframe src="https://www.feuerwehr-krems.at/Dokumente/Bezirk/Die%20Feuerwehren/Die%20Feuerwehren/FFInfo_Allgemein.asp?EldisID=337401&Select=1" frameborder="0"
+                    class="w-full aspect-video"
+                ></iframe>
+            </section>
+
+            <section class="rounded-xl bg-white shadow-sm xl:col-span-6 overflow-hidden">
+                <iframe src="https://warnungen.zamg.at/wsapp/de/alle/heute/496799,437164,539634,459470" frameborder="0"
+                    class="w-full aspect-video"
+                ></iframe>
             </section>
         </div>
     </div>
