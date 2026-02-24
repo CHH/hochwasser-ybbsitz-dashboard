@@ -30,10 +30,13 @@ const props = defineProps(['river', 'data', 'history'])
             class="border-0"
             :height="400"
             :options="{
+                grid: {
+                    left: 32,
+                    right: 0,
+                },
                 xAxis: [
                     {
                         type: 'time',
-                        name: 'Zeit',
                     }
                 ],
                 yAxis: {

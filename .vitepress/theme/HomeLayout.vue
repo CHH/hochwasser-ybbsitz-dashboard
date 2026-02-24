@@ -1,7 +1,5 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import EChart from './EChart.vue';
-import dayjs from 'dayjs';
 import { data as rivers } from '../../data/rivers.data.js'
 import { data as pegel } from '../../data/pegel.data.js'
 import { data as history } from '../../data/history.data.js'
