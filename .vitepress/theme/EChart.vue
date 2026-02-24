@@ -3,6 +3,7 @@ import * as echarts from 'echarts'
 import { inject, onBeforeUnmount, onMounted, onUpdated, ref, watch } from 'vue';
 import langDE from 'echarts/lib/i18n/langDE.js'
 import merge from 'lodash/merge'
+import debounce from 'lodash/debounce'
 
 echarts.registerLocale('DE', langDE)
 
@@ -43,7 +44,9 @@ const props = defineProps({
 const globalInitOptions = inject('echarts.globalInitOptions', {})
 const globalOptions = inject('echarts.globalOptions', {})
 const chartElement = ref(null)
+
 let chart = null
+let resizeObserver = null
 
 onMounted(() => {
 	chart = echarts.init(chartElement.value, null, {
@@ -66,10 +69,16 @@ onMounted(() => {
 		emit('set-options', { chart })
 	})
 
+	const resize = debounce(() => chart.resize(), 250)
+
+	resizeObserver = new ResizeObserver(() => resize())
+	resizeObserver.observe(chartElement.value)
+
 	emit('init', { chart })
 })
 
 onBeforeUnmount(() => {
+	resizeObserver.disconnect()
 	echarts.dispose(chart)
 })
 </script>
