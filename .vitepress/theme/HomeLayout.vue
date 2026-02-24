@@ -59,7 +59,7 @@ onBeforeUnmount(() => {
                             yAxis: {
                                 name: `Pegel in ${pegel[river.id].Key.cKurzeinheit}`,
                                 min: 0,
-                                max: Math.max(+pegel[river.id].Key.cLinie3, ...history[river.id].map((it) => +it.Value)),
+                                max: Math.max(+pegel[river.id].Key.cLinie3, ...history[river.id].map((it) => +it.Value)) * 1.1,
                             },
                             tooltip: {
                             },
