@@ -15,7 +15,7 @@ export default {
 
             pegel[json.Key.aPegelID] = json
         }
-
+console.log(pegel)
         return pegel
     }
 }

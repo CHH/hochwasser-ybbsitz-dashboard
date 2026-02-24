@@ -45,7 +45,7 @@ onBeforeUnmount(() => {
                         </div>
                     </div>
                 </header>
-                <div class="py-3 px-6">
+                <div class="py-3 px-3">
                     <e-chart
                         class="border-0"
                         :height="400"
@@ -57,7 +57,7 @@ onBeforeUnmount(() => {
                                 }
                             ],
                             yAxis: {
-                                name: 'Pegel in cm',
+                                name: `Pegel in ${pegel[river.id].Key.cKurzeinheit}`,
                                 min: 0,
                                 max: Math.max(+pegel[river.id].Key.cLinie3, ...history[river.id].map((it) => +it.Value)),
                             },
@@ -93,15 +93,18 @@ onBeforeUnmount(() => {
                                     )),
                                     symbolSize: 0,
                                     markLine: {
+                                        symbol: ['none', 'none'],
+                                        label: {
+                                            formatter: '{b}',
+                                            position: 'insideStartTop',
+                                            color: 'rgba(0, 0, 0, 0.5)',
+                                        },
                                         data: [
                                             {
                                                 name: 'Vorwarnstufe',
                                                 yAxis: +pegel[river.id].Key.cLinie1,
                                                 lineStyle: {
                                                     color: 'yellow',
-                                                },
-                                                label: {
-                                                    formatter: '{b}'
                                                 },
                                                 symbol: 'none',
                                             },
@@ -111,9 +114,6 @@ onBeforeUnmount(() => {
                                                 lineStyle: {
                                                     color: 'orange',
                                                 },
-                                                label: {
-                                                    formatter: '{b}'
-                                                },
                                                 symbol: 'none',
                                             },
                                             {
@@ -121,9 +121,6 @@ onBeforeUnmount(() => {
                                                 yAxis: +pegel[river.id].Key.cLinie3,
                                                 lineStyle: {
                                                     color: 'red',
-                                                },
-                                                label: {
-                                                    formatter: '{b}'
                                                 },
                                                 symbol: 'none',
                                             },
@@ -133,7 +130,7 @@ onBeforeUnmount(() => {
                             ]
                         }"
                     />
-                    <details class="mt-3">
+                    <details class="mt-3 mx-3">
                         <summary class="text-gray-500 text-sm">Rohdaten</summary>
                         <pre class="text-xs"><code>{{ pegel[river.id] }}</code></pre>
                         <pre class="text-xs"><code>{{ history[river.id] }}</code></pre>
