@@ -7,7 +7,7 @@ export default {
             },
             schwarzois: {
                 id: 302,
-                name: 'Schwarzois',
+                name: 'Schwarze Ois',
             },
         }
     }

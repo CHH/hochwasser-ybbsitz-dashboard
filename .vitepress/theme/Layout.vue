@@ -9,7 +9,7 @@ const { site, frontmatter } = useData()
 <template>
   <div class="p-3 xl:p-6">
     <header>
-      Hochwasser Pegel Ybbsitz
+      <h1 class="font-bold text-lg">Hochwasser Dashboard Ybbsitz</h1>
     </header>
     <div v-if="frontmatter.home">
       <HomeLayout/>
@@ -22,7 +22,7 @@ const { site, frontmatter } = useData()
         <b>Impressum: </b>
       </div>
       <div>
-        Ing. Christoph Hochstrasser - hochstrasser web apps
+        Ing. Christoph Hochstrasser
       </div>
       <div>
         Haselgraben 23

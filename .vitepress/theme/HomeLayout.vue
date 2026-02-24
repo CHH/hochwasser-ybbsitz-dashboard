@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import { data as rivers } from '../../data/rivers.data.js'
 import { data as pegel } from '../../data/pegel.data.js'
 import { data as history } from '../../data/history.data.js'
+import River from './Partials/Home/River.vue';
 
 const timer = ref(null)
 
@@ -26,116 +27,17 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="">
-        <h1 class="mb-3">Dashboard</h1>
-
+    <div class="pt-3">
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-3 xl:gap-6"> 
             <section
-                class="rounded-xl bg-white shadow-sm xl:col-span-6"
+                class="rounded-xl bg-gray-800 xl:col-span-6"
                 v-for="(river) in rivers"
             >
-                <header class="py-3 px-6 rounded-t grid grid-cols-12 items-center">
-                    <h2 class="col-span-6">{{ river.name }}</h2>
-                    <div class="col-span-6 text-right">
-                        <div>
-                            {{ (+(pegel[river.id].Value?.Value ?? null)).toLocaleString() }} cm
-                        </div>
-                        <div class="text-sky-600 text-sm">
-                            {{ dayjs(pegel[river.id].Value?.Key).format('DD.MM.YYYY HH:mm') }}
-                        </div>
-                    </div>
-                </header>
-                <div class="py-3 px-3">
-                    <e-chart
-                        class="border-0"
-                        :height="400"
-                        :options="{
-                            xAxis: [
-                                {
-                                    type: 'time',
-                                    name: 'Zeit',
-                                }
-                            ],
-                            yAxis: {
-                                name: `Pegel in ${pegel[river.id].Key.cKurzeinheit}`,
-                                min: 0,
-                                max: Math.max(+pegel[river.id].Key.cLinie3, ...history[river.id].map((it) => +it.Value)) * 1.1,
-                            },
-                            tooltip: {
-                            },
-                            toolbox: {
-                                feature: {
-                                    dataZoom: {
-                                        yAxisIndex: 'none'
-                                    },
-                                    restore: {},
-                                    saveAsImage: {}
-                                }
-                            },
-                            dataZoom: [
-                                {
-                                    type: 'inside',
-                                    start: 0,
-                                    end: 100
-                                },
-                                {
-                                    start: 0,
-                                    end: 100
-                                }
-                            ],
-                            series: [
-                                {
-                                    name: `Pegel ${river.name}`,
-                                    type: 'line',
-                                    step: true,
-                                    data: history[river.id].map((it) => (
-                                        [+dayjs(it.Key), it.Value]
-                                    )),
-                                    symbolSize: 0,
-                                    markLine: {
-                                        symbol: ['none', 'none'],
-                                        label: {
-                                            formatter: '{b}',
-                                            position: 'insideStartTop',
-                                            color: 'rgba(0, 0, 0, 0.5)',
-                                        },
-                                        data: [
-                                            {
-                                                name: 'Vorwarnstufe',
-                                                yAxis: +pegel[river.id].Key.cLinie1,
-                                                lineStyle: {
-                                                    color: 'yellow',
-                                                },
-                                                symbol: 'none',
-                                            },
-                                            {
-                                                name: 'Hochwasserwarnstufe',
-                                                yAxis: +pegel[river.id].Key.cLinie2,
-                                                lineStyle: {
-                                                    color: 'orange',
-                                                },
-                                                symbol: 'none',
-                                            },
-                                            {
-                                                name: 'Hochwasseralarmstufe',
-                                                yAxis: +pegel[river.id].Key.cLinie3,
-                                                lineStyle: {
-                                                    color: 'red',
-                                                },
-                                                symbol: 'none',
-                                            },
-                                        ]
-                                    }
-                                }
-                            ]
-                        }"
-                    />
-                    <details class="mt-3 mx-3">
-                        <summary class="text-gray-500 text-sm">Rohdaten</summary>
-                        <pre class="text-xs"><code>{{ pegel[river.id] }}</code></pre>
-                        <pre class="text-xs"><code>{{ history[river.id] }}</code></pre>
-                    </details>
-                </div>
+                <River
+                    :river="river"
+                    :data="pegel[river.id]"
+                    :history="history[river.id]"
+                />
             </section>
 
             <section class="rounded-xl bg-white shadow-sm xl:col-span-6 overflow-hidden">
